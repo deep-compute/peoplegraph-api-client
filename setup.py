@@ -12,7 +12,7 @@ setup(
         "requests>=2.11",
     ],
     author="Deep-Compute",
-    author_email="rebello.anthony@gmail.com",
+    author_email="ops@deepcompute.com",
     description="Peoplegraph api client",
     keywords=["peoplegraph"],
     classifiers=[
