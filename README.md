@@ -1,7 +1,6 @@
-# peoplegraph-api-client
+# peoplegraph-api-client [![Build Status][travis-ci-status-img]][travis-ci-peoplegraph-api-client]
 
 API client for deep-compute's peoplegraph product http://www.deepcompute.com/peoplegraph/
-
 
 # Installation
 
@@ -23,3 +22,6 @@ POST the result.
 ```bash
 peoplegraph -H "http://www.deepcompute.com" -u "<username>" -s "<api-secret-key>" -n "John Doe" --callback "http://www.myserver.com"
 ```
+
+[travis-ci-status-img]: https://travis-ci.org/deep-compute/peoplegraph-api-client.svg?branch=master
+[travis-ci-peoplegraph-api-client]: https://travis-ci.org/deep-compute/peoplegraph-api-client
