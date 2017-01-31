@@ -1,0 +1,34 @@
+language: python
+python:
+  - "2.7"
+install: 
+  - "pip install ."
+script: 
+  - echo "no tests yet"
+before_deploy:
+  - "wget https://github.com/jgm/pandoc/releases/download/1.19.1/pandoc-1.19.1-1-amd64.deb -O $TRAVIS_BUILD_DIR/pandoc.deb"
+  - "sudo dpkg -i $TRAVIS_BUILD_DIR/pandoc.deb"
+  - "rm $TRAVIS_BUILD_DIR/pandoc.deb"
+  - "pandoc --from=markdown --to=rst --output=$TRAVIS_BUILD_DIR/README.rst README.md"
+deploy:
+  # test pypi
+  - provider: pypi
+    distributions: "sdist bdist_wheel"
+    server: https://testpypi.python.org/pypi
+    skip_cleanup: true
+    user: "deepcompute"
+    password:
+      secure: "qgwPDfVo/P1n0aQNwOvhQSQt1ikYLpPlVXfStW4FbyPJHA2YTfOjSvlIKhw9M2awHwI6bGZUlsV/po3Vsd8tdn665EjArTPIcuRs7Hf5qplC5XrwDynGzxAQ0JXKEHG3nlZ2/JPEGePgk05jQ1J/n7f7TfuZfG2IoSwkCAsKGcFQi741jowzAnWE2bmY1tGT2aYQSTSY4eARcIOZ6sORQ4Ac9RIM4Fiduyj48+WcSxRfYOWemZPJGLmTq/43CIcPSVpRoKA6zfuHUzegtjiyouqenGZQCa0sylUqZyLBq1MdeRwvR9LoUChisgoYlYVRiTKFMyvJg2ePKhLNqzBMFstnJQFbm8l6SNDZomJcMHImDBNX2zF6tSoN0K7OjMELUTIVhgEbhwr3htpzo31E/ZejpVbz1b0Z+xK4z8zGFxY+TqB0YyKTX7xTDZt6KHUukihLr/m669AsSd2Kh5xfWWbGJQbiA/0zqO8ECVoqPjP6k+9gCUWh96CJ5U+aIa0apL6tphaZ5+XZF5xy0Jhu+HRgwjPYDbl1H1lgtEADQrcIQ95poOZFSld/YXyND7xSP3W9wSg8x2ouascEUHivKR2jFPlxagsTrfOskOzTFNdqt3eoFgjqS/8cwKodDUzIopcSU+GF+juRjz7ty7tU1fasLkYZWIUGSAvO1ZeTrDQ="
+    on:
+      branch: master
+      tags: false
+  # pypi
+  - provider: pypi
+    distributions: "sdist bdist_wheel"
+    skip_cleanup: true
+    user: "deepcompute"
+    password:
+      secure: "qgwPDfVo/P1n0aQNwOvhQSQt1ikYLpPlVXfStW4FbyPJHA2YTfOjSvlIKhw9M2awHwI6bGZUlsV/po3Vsd8tdn665EjArTPIcuRs7Hf5qplC5XrwDynGzxAQ0JXKEHG3nlZ2/JPEGePgk05jQ1J/n7f7TfuZfG2IoSwkCAsKGcFQi741jowzAnWE2bmY1tGT2aYQSTSY4eARcIOZ6sORQ4Ac9RIM4Fiduyj48+WcSxRfYOWemZPJGLmTq/43CIcPSVpRoKA6zfuHUzegtjiyouqenGZQCa0sylUqZyLBq1MdeRwvR9LoUChisgoYlYVRiTKFMyvJg2ePKhLNqzBMFstnJQFbm8l6SNDZomJcMHImDBNX2zF6tSoN0K7OjMELUTIVhgEbhwr3htpzo31E/ZejpVbz1b0Z+xK4z8zGFxY+TqB0YyKTX7xTDZt6KHUukihLr/m669AsSd2Kh5xfWWbGJQbiA/0zqO8ECVoqPjP6k+9gCUWh96CJ5U+aIa0apL6tphaZ5+XZF5xy0Jhu+HRgwjPYDbl1H1lgtEADQrcIQ95poOZFSld/YXyND7xSP3W9wSg8x2ouascEUHivKR2jFPlxagsTrfOskOzTFNdqt3eoFgjqS/8cwKodDUzIopcSU+GF+juRjz7ty7tU1fasLkYZWIUGSAvO1ZeTrDQ="
+    on:
+      branch: master
+      tags: true
