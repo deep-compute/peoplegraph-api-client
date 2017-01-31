@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="peoplegraph-api-client",
-    version="0.1.0",
+    version="0.1.1",
     license='MIT License',
     packages=["peoplegraph_api_client"],
     url="https://github.com/deep-compute/peoplegraph-api-client",

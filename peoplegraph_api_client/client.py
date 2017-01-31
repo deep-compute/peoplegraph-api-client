@@ -72,13 +72,16 @@ class Client(object):
         self.host = host
         self.auth = HmacAuth(username, secret)
 
-    def get_person(self, name):
+    def get_person(self, name, callback=None):
         """
         queries the server for a  person
         """
 
         url = urljoin(self.host, "/peoplegraph/api/lookup")
         params = { "name": name }
+        if callback is not None:
+            params['callback'] = callback
+
         # TODO add settings
         try:
             resp = requests.get(url, auth=self.auth, params=params).json()
